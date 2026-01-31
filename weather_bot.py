@@ -8,6 +8,11 @@ CITY = "Vancouver"
 def get_weather():
     url = f"http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={WEATHER_API_KEY}&units=metric"
     response = requests.get(url).json()
+
+    if "weather" not in response:
+        print(f"API Error Response: {response}")
+        return "Unknown Risk"
+    
     condition = response['weather'][0]['main'].lower()
     
     mapping = {
